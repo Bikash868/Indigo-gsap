@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+svg {
+  z-index: 100;
+}
+
+:root {
+  --padding: 10vmin;
+  --indigo-deep: #3B0086;
+  --indigo-primary: #4B0096;
+  --indigo-light: #6A1CB9;
+  --indigo-accent: #FFD700;
+  --navy: #0A0E2A;
+  --white: #FFFFFF;
+  --off-white: #F4F5F7;
+  --text-dark: #1A1A2E;
+  --text-muted: #5A5A7A;
+
+  --font-size-large: 8vw;
+  --font-size-medium: 4vw;
+  --font-size-normal: 2vw;
+
+  @media only screen and (min-width: 800px) {
+    --font-size-large: 64px;
+    --font-size-medium: 32px;
+    --font-size-normal: 16px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    --font-size-large: 40px;
+    --font-size-medium: 20px;
+    --font-size-normal: 14px;
+  }
+}
+
+a {
+  color: var(--indigo-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+a:hover {
+  border-bottom-color: var(--indigo-accent);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin-top: 10px;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  min-width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--navy);
+  color: var(--white);
+  font-weight: 400;
+  font-size: var(--font-size-normal);
+  overflow-x: hidden;
+}
+
+canvas {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.solid {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.wireframe {
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+
+  .trigger {
+    position: absolute;
+    top: 0;
+    height: 100%;
+  }
+
+  .section {
+    position: relative;
+    padding: var(--padding);
+    --pad2: calc(var(--padding) * 2);
+    width: calc(100vw - var(--pad2));
+    height: calc(100vh - var(--pad2));
+    margin: 0 auto;
+    z-index: 2;
+
+    &.dark {
+      color: white;
+      background-color: transparent;
+    }
+
+    &.right {
+      text-align: right;
+    }
+  }
+
+  /* ── Hero ── */
+  .hero-section {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--indigo-deep) 100%);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .brand-tag {
+      display: inline-block;
+      font-size: calc(var(--font-size-normal) * 0.85);
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--indigo-accent);
+      margin-bottom: 2vmin;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 420px;
+      line-height: 1.7;
+    }
+  }
+
+  /* ── Light sections (on beige / off-white bg) ── */
+  .section-light {
+    background-color: var(--off-white);
+    color: var(--text-dark);
+
+    p {
+      color: var(--text-muted);
+    }
+  }
+
+  /* ── Indigo-branded dark sections ── */
+  .section-indigo {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--indigo-deep) 60%);
+    color: var(--white);
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .blueprint {
+    position: relative;
+    background-color: var(--navy);
+    background-image: linear-gradient(rgba(75, 0, 150, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(75, 0, 150, 0.15) 1px, transparent 1px),
+      linear-gradient(rgba(75, 0, 150, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(75, 0, 150, 0.08) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    background-attachment: fixed;
+
+    svg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      stroke: var(--indigo-accent);
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .dark {
+      background-color: transparent;
+    }
+  }
+
+  .ground-container {
+    position: relative;
+    overflow: hidden;
+
+    .parallax {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: -100px;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: cover;
+      transform-origin: top center;
+    }
+
+    .ground {
+      z-index: -1;
+      background-image: url("https://assets.codepen.io/557388/background-reduced.jpg");
+    }
+
+    .clouds {
+      z-index: 2;
+      background-image: url("https://assets.codepen.io/557388/clouds.png");
+    }
+  }
+
+  .scroll-cta,
+  .credits {
+    position: absolute;
+    bottom: var(--padding);
+  }
+
+  .scroll-cta {
+    font-size: var(--font-size-medium);
+    opacity: 0;
+    font-weight: 300;
+    letter-spacing: 2px;
+  }
+
+  /* ── Fun Facts ── */
+  .fun-facts {
+    position: relative;
+    background: linear-gradient(160deg, var(--navy) 0%, #120028 40%, var(--indigo-deep) 100%);
+
+    .fact-section {
+      color: white;
+
+      h2 {
+        font-size: calc(var(--font-size-large) * 1.4);
+        font-weight: 800;
+        color: var(--indigo-accent);
+        -webkit-text-fill-color: var(--indigo-accent);
+        background: none;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.65);
+        max-width: 500px;
+      }
+
+      &.right p {
+        margin-left: auto;
+      }
+    }
+  }
+
+  /* ── History ── */
+  .history {
+    position: relative;
+    background-color: var(--off-white);
+
+    .section {
+      color: var(--text-dark);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+      h2 {
+        color: var(--indigo-deep);
+      }
+
+      p {
+        color: var(--text-muted);
+        max-width: 540px;
+        line-height: 1.7;
+      }
+
+      &.right p {
+        margin-left: auto;
+      }
+    }
+  }
+
+  .farewell {
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    margin-bottom: 3vmin;
+  }
+
+  .sunset {
+    background: url("https://assets.codepen.io/557388/sunset-reduced.jpg") no-repeat top center;
+    background-size: cover;
+    transform-origin: top center;
+  }
+
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: calc(var(--font-size-large) * 1.2);
+    margin: 0 0 2vmin 0;
+    font-weight: 800;
+    display: block;
+    line-height: 1.05;
+  }
+
+  h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-size-large);
+    margin: 0vmin 0 2vmin 0;
+    font-weight: 700;
+    display: inline;
+  }
+
+  h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-size-medium);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .end h2 {
+    margin-bottom: 50vh;
+  }
+
+  .loading {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-medium);
+    color: var(--white);
+    background: var(--navy);
+    font-weight: 300;
+    letter-spacing: 3px;
+  }
+}
