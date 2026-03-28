@@ -67,11 +67,13 @@ const createScene = (model: THREE.Group): SceneData => {
   const softLight = new THREE.AmbientLight(0xffffff, 1.0);
   scene.add(softLight);
 
-  const edges = new THREE.EdgesGeometry(model.children[0].geometry as THREE.BufferGeometry);
+  const mesh = model.children[0] as THREE.Mesh;
+  const edges = new THREE.EdgesGeometry(mesh.geometry);
   const line = new THREE.LineSegments(edges);
-  line.material.depthTest = false;
-  line.material.opacity = 0.5;
-  line.material.transparent = true;
+  const lineMat = line.material as THREE.Material;
+  lineMat.depthTest = false;
+  lineMat.opacity = 0.5;
+  lineMat.transparent = true;
   line.position.x = 0.5;
   line.position.z = -1;
   line.position.y = 0.2;
